@@ -11,13 +11,13 @@ public class Frog : MonoBehaviour {
 
 		//For PC to move all over
 
-		if (Input.GetKeyDown (KeyCode.RightArrow))
+		if (Input.GetKeyDown (KeyCode.D))
 			rb.MovePosition (rb.position + Vector2.right);
-		else if (Input.GetKeyDown (KeyCode.LeftArrow))
+		else if (Input.GetKeyDown (KeyCode.A))
 			rb.MovePosition (rb.position + Vector2.left);
-		else if (Input.GetKeyDown (KeyCode.UpArrow))
+		else if (Input.GetKeyDown (KeyCode.W))
 			rb.MovePosition (rb.position + Vector2.up);
-		else if (Input.GetKeyDown (KeyCode.DownArrow))
+		else if (Input.GetKeyDown (KeyCode.S))
 			rb.MovePosition (rb.position + Vector2.down);
 
 		//For Android to move in only one direction
