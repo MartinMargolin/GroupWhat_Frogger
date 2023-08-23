@@ -1,11 +1,21 @@
-﻿using UnityEngine;
+﻿using Unity.PlasticSCM.Editor.WebApi;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Frog : MonoBehaviour {
 
 	public Rigidbody2D rb;
 
-	void Update () {
+	GameManager gameManager;
+
+
+
+    private void Start()
+    {
+		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
+    void Update () {
 
 		//Clamp the area in which frog can move
 
@@ -20,13 +30,6 @@ public class Frog : MonoBehaviour {
 		else if (Input.GetKeyDown (KeyCode.S))
 			rb.MovePosition (rb.position + Vector2.down);
 
-		//For Android to move in only one direction
-		/*
-		if (Input.GetButtonDown ("Jump") || Input.GetMouseButtonDown (0)) 
-		{
-			rb.MovePosition (rb.position + Vector2.up);
-		}
-		*/
 	}
 
 	void OnTriggerEnter2D (Collider2D col)
@@ -34,8 +37,15 @@ public class Frog : MonoBehaviour {
 		if (col.tag == "Car") 
 		{
 			Debug.Log("WE LOST!");
-			Score.CurrentScore = 0;
-			SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
+			
+			// GameManager lose;
+		}
+
+		if (col.tag == "Coin")
+		{
+			GameObject.Find("Level").GetComponent<Level>().currency++;
+			Destroy(col.gameObject);
+			gameObject.GetComponent<AudioSource>().PlayOneShot(gameObject.GetComponent<AudioSource>().clip);
 		}
 	}
 }
