@@ -14,16 +14,25 @@ public class ItemUI : MonoBehaviour
 
     public bool isBought;
     public bool isEquipped;
-    
+    [SerializeField] public int itemIndex;
+    [SerializeField] public bool itemType; // true = car false = frog
+
+   
     public GameManager gameManager;
 
 
-    private void Start()
+    private void Awake()
     {
         isBought = false;
         isEquipped = false;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        buyButton = gameObject.transform.Find("BUY").gameObject;
+        equipButton = gameObject.transform.Find("EQUIP").gameObject;
+        buyButton.GetComponent<Button>().onClick.AddListener(delegate { onBuy(); });
+        equipButton.GetComponent<Button>().onClick.AddListener(delegate { onEquip(); });
     }
+
+    
 
 
     private void Update()
@@ -51,6 +60,8 @@ public class ItemUI : MonoBehaviour
         {
             isBought = true;
             gameManager.coins -= price;
+            
+          
         }
     }
 
@@ -58,7 +69,13 @@ public class ItemUI : MonoBehaviour
     {
         if (isBought && !isEquipped)
         {
-            
+            foreach (var item in gameManager.items)
+            {
+                if (item.GetComponent<ItemUI>().isBought && item.GetComponent<ItemUI>().itemType == itemType) item.GetComponent<ItemUI>().isEquipped = false;
+            }
+
+            isEquipped = true;
+
         }
     }
 

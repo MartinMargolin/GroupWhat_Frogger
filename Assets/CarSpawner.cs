@@ -10,11 +10,20 @@ public class CarSpawner : MonoBehaviour {
 
 	public Transform[] spawnPoints;
 
+	public GameManager gameManager;
+
 	float nextTimeToSpawn = 0f;
 
-	void Update()
-	{
-		if (nextTimeToSpawn <= Time.time) 
+		
+
+    private void Start()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+    void Update()
+	{	
+		
+		if (nextTimeToSpawn <= Time.time && gameManager.state == GameManager.GameState.PLAY) 
 		{
 			SpawnCar ();
 			nextTimeToSpawn = Time.time + spawnDelay;

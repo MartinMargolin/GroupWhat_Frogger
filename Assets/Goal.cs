@@ -12,11 +12,6 @@ public class Goal : MonoBehaviour {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();   
     }
 
-    void OnTriggerEnter2D()
-	{
-		
-		
-		// gameManager roundWin
-	}
+   
 
 }

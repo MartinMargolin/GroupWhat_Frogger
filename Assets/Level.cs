@@ -10,6 +10,8 @@ public class Level : MonoBehaviour
 
     [SerializeField] private TMP_Text coinText;
 
+    public List<GameObject> coins;
+
     public int currency;
    
     void Start()
@@ -24,7 +26,27 @@ public class Level : MonoBehaviour
         while(coinsToSpawn >= 0) 
         {
             coinsToSpawn--;
-            Instantiate(coin, new Vector2(Random.Range(-8, 9),Random.Range(-3, 4)), coin.transform.rotation);
+           GameObject temp = Instantiate(coin, new Vector2(Random.Range(-8, 9),Random.Range(-3, 4)), coin.transform.rotation);
+            coins.Add(temp);
         }
     }
+
+    public void ResetCoins()
+    {
+        foreach (var i in coins)
+        {
+            Destroy(i);
+        }
+        coins.Clear();
+        coinsToSpawn = Random.Range(2, 8);
+        while (coinsToSpawn >= 0)
+        {
+            coinsToSpawn--;
+            GameObject temp = Instantiate(coin, new Vector2(Random.Range(-8, 9), Random.Range(-3, 4)), coin.transform.rotation);
+            coins.Add(temp);
+        }
+
+    }
+
+
 }
