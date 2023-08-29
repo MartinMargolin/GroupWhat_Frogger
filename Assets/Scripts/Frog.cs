@@ -25,13 +25,26 @@ public class Frog : MonoBehaviour {
         if (canMove)
 		{
             if (Input.GetKeyDown(KeyCode.D))
-                rb.MovePosition(rb.position + Vector2.right);
+            {
+				rb.MovePosition(rb.position + Vector2.right);
+				this.gameObject.transform.eulerAngles = new Vector3(0, 0, -90);
+			}
+             
             else if (Input.GetKeyDown(KeyCode.A))
+            {
                 rb.MovePosition(rb.position + Vector2.left);
+				this.gameObject.transform.eulerAngles = new Vector3(0, 0, 90);
+			}
             else if (Input.GetKeyDown(KeyCode.W))
+            {
                 rb.MovePosition(rb.position + Vector2.up);
+				this.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+            }
             else if (Input.GetKeyDown(KeyCode.S))
+            {
                 rb.MovePosition(rb.position + Vector2.down);
+				this.gameObject.transform.eulerAngles = new Vector3(0, 0, 180);
+			}
         }
 		
 

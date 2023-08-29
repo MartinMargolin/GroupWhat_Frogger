@@ -195,6 +195,7 @@ public class GameManager : MonoBehaviour
     {
         state = GameState.PLAY;
         doOnce = true;
+        GameObject.Find("Level").GetComponent<Level>().ResetCoins();
         GameObject.Find("UI").transform.Find("ShopMenu").gameObject.SetActive(false);
         GameObject.Find("UI").transform.Find("StartMenu").gameObject.SetActive(false);
     }
